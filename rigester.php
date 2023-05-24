@@ -1,12 +1,12 @@
 <?php
-require_once "class.php";
 session_start();
+require_once "class.php";
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $phone = mb_strlen($_POST['phone'], "UTF-8") === 11 ? $_POST['phone'] : "";
 
     $password = $_POST['password'];
-
+    $hash = password_hash($password, PASSWORD_DEFAULT);
     $conn = new PDO("mysql:host=localhost;dbname=login", "root", "");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -15,7 +15,6 @@ if (isset($_POST['submit'])) {
     $user->setusername($username);
     $user->setphone($phone);
     $user->setpassword($password);
-
     $result = $user->insertdata();
     echo $result;
 }
