@@ -1,34 +1,53 @@
 <?php
-require_once "class.php";
-require_once "db.php";
+require_once "creatclass.php";
+$conn = require_once "db.php";
 
 session_start();
-if (isset($_POST["login"])) {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $phone = $_POST["phone"];
-
-    $stmt = $conn->prepare("SELECT password FROM users WHERE username || phone = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $hash = $row["password"];
-        if (password_verify($password, $hash)) {
-            $_SESSION["username"] = $username;
-            echo " sucsessfuly ";
-            exit;
-        } else {
-        
-            echo "<p>نام کاربری یا رمز عبور اشتباه است.</p>";
-            echo "<p><a href='index.php'>بازگشت به صفحه ورود</a></p>";
-        }
-    } else {
-        echo "<p>نام کاربری وجود ندارد.</p>";
-        echo "<p><a href='index.php'>بازگشت به صفحه ورود</a></p>";
-    }
-    $stmt->close();
-    $conn->close();
+if (isset($_POST['submit']))
+{
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $sql = "SELECT * FROM users WHERE username='$username' and password= '$password' and phone= '$phone';";
+    $result = $conn->query($sql);
+    
+if($result->num_rows == 1)
+{ $_SESSION['username']= $username; header('location:index3.php');
 }
-?>
+else { $message = "خوش امدید....";
+}
+}
+
+
+
+
+
+?> 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>login page</h2>
+    <form method="POST" action="">
+        <label for="username">نام کاربری</label>
+        <input type="text" name="username" required><br>
+        <label for="phone">شماره همراه</label>
+        <input type="number" name="phone"><br>
+        <label for="password"> رمز عبور</label>
+        <input type="password" name="password" id="password" required><br>
+        <input style="background-color:#F63" type="submit" class="btn btn-succsess" value="ثبت" name="submit">
+
+    </form>
+
+
+</body>
+
+</html>
