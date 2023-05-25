@@ -1,51 +1,55 @@
 <?php
-require_once "creatclass.php";
-
 
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $phone = mb_strlen($_POST['phone'], "UTF-8") === 11 ? $_POST['phone'] : "";
+  $username = $_POST['username'];
+  $phone = mb_strlen($_POST['phone'], "UTF-8") === 11 ? $_POST['phone'] : "";
 
-    $password = $_POST['password'];
+  $password = $_POST['password'];
 
-    $conn = new PDO("mysql:host=localhost;dbname=login", "root", "");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $user = new user();
+  $user->setdb($conn);
+  $user->setusername($username);
+  $user->setphone($phone);
+  $user->setpassword($password);
 
-    $user = new user();
-    $user->setdb($conn);
-    $user->setusername($username);
-    $user->setphone($phone);
-    $user->setpassword($password);
-
-    $result = $user->insertdata();
-    echo $result;
+  $result = $user->insertdata();
+  echo $result;
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>صفحه ورود</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h2>login page</h2>
-    <form method="POST" action="">
+  <div class="container">
+    <h1>صفحه ورود</h1>
+    <form action="login.php" method="post">
+      <div class="form-group">
         <label for="username">نام کاربری</label>
-        <input type="text" name="username" required><br>
-        <label for="phone">شماره همراه</label>
-        <input type="number" name="phone"><br>
-        <label for="password"> رمز عبور</label>
-        <input type="password" name="password" id="password" required><br>
-        <input style="background-color:#F63" type="submit" class="btn btn-succsess" value="ثبت" name="submit">
-        <a href="rigester.php">  آیا حساب ندارید؟</a>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="phone
+        ">شماره همراه</label>
+        <input type="number" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="password">رمز عبور</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <a href="rigester.php">ثبت نام</a>
+      <hr>
+      <div class="form-group">
+        <button type="submit" name="login">ورود</button>
+      </div>
     </form>
-
-
+  </div>
 </body>
 
 </html>
