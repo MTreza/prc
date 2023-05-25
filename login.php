@@ -7,7 +7,6 @@ if (isset($_POST["login"])) {
   $password = $_POST["password"];
   $phone = $_POST["phone"];
 
- 
   $stmt = $conn->prepare("SELECT password FROM users WHERE username = ? OR phone = ?");
   $stmt->bind_param("ss", $username, $phone);
 
