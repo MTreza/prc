@@ -5,7 +5,7 @@ require_once "db.php";
 if (isset($_POST['submit'])) {
     $username = trim($_POST['username']);
     $phone = mb_strlen($_POST['phone'], "UTF-8") === 11 ? $_POST['phone'] : "";
-    $password = password_hash($_POST['password'] , PASSWORD_BCRYPT) ;
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     if ($phone === "") {
         echo "شماره همراه نامعتبر است.";
@@ -41,14 +41,20 @@ if (isset($_POST['submit'])) {
 <body>
     <h2>صفحه ثبت نام</h2>
     <form method="POST" action="">
-        <label for="username">نام کاربری</label>
-        <input type="text" name="username" pattern="[a-zA-Z0-9]+" required><br>
-        <label for="phone">شماره همراه</label>
-        <input type="number" name="phone"><br>
-        <label for="password">رمز عبور</label>
-        <input type="password" name="password" id="password" required><br>
-        <input style="background-color:#F63" type="submit" class="btn btn-succsess" value="ثبت" name="submit">
-    <a href="login.php">حساب دارید؟</a>
+        <div class="form-element">
+            <label for="username">نام کاربری</label>
+            <input type="text" name="username" pattern="[a-zA-Z0-9]+" required><br>
+        </div>
+        <div class="form-element">
+            <label for="phone">شماره همراه</label>
+            <input type="number" name="phone"><br>
+        </div>
+        <div class="form-element">
+            <label for="password">رمز عبور</label>
+            <input type="password" name="password" id="password" required><br>
+        </div>
+        <input style="background-color:#F63" value="register" type="submit" class="btn btn-succsess" value="ثبت" name="submit">
+        <a href="login.php">حساب دارید؟</a>
     </form>
 </body>
 

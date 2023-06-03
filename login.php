@@ -39,21 +39,21 @@ if (isset($_POST["submit"])) {
     <div class="container">
         <h1>صفحه ورود</h1>
         <form action="login.php" method="post">
-            <div class="form-group">
+            <div class="form-element">
                 <label for="username">نام کاربری</label>
                 <input type="text" id="username" name="username" required>
             </div>
-            <div>
+            <div class="form-element">
                 <label for="phone">شماره تلفن</label>
                 <input type="number" name="phone">
             </div>
-            <div class="form-group">
+            <div class="form-element">
                 <label for="password">رمز عبور</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <a href="rigester.php">ثبت نام</a>
             <hr>
-            <div class="form-group">
+            <div class="form-element">
                 <button type="submit" name="submit">ورود</button>
                 <input type="hidden" name="submit" value="1">
             </div>
