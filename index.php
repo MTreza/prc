@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
  <label for="password">رمز عبور</label>
  <input type="password" id="password" name="password" required>
  </div>
- <a href="rigester.php">ثبت نام</a>
+ <a href="register.php">ثبت نام</a>
  <hr>
  <div class="form-group">
  <button type="submit" name="submit">ورود</button>
