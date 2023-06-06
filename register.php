@@ -18,12 +18,12 @@ if (isset($_POST['submit'])) {
     $user->setpassword($password);
     try {
         $result = $user->insertdata();
-        echo "ثبت نام با موفقیت انجام شد.";
-        header("login.php");
+        header("location:login.php");
     } catch (PDOException $e) {
         echo "خطا در ثبت نام: " . $e->getMessage();
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,8 @@ if (isset($_POST['submit'])) {
             <label for="password">رمز عبور</label>
             <input type="password" name="password" id="password" required><br>
         </div>
-        <input style="background-color:#F63" value="register" type="submit" class="btn btn-succsess" value="ثبت" name="submit">
+        <input style="background-color:#F63" value="register" type="submit" class="btn btn-succsess" value="ثبت"
+            name="submit" required="login.php">
         <a href="login.php">حساب دارید؟</a>
     </form>
 </body>

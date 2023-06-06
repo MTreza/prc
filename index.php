@@ -1,22 +1,4 @@
-
-<?php
-require_once "class.php";
-require_once "db.php";
-if (isset($_POST['submit'])) {
- $username = $_POST['username'];
- $phone = mb_strlen($_POST['phone'], "UTF-8") === 11 ? $_POST['phone'] : "";
-
- $password = $_POST['password'];
- $user = new USER();
- $user->setdb($conn);
- $user->setusername($username);
- $user->setphone($phone);
- $user->setpassword($password);
-
- $result = $user->insertdata();
- echo $result;
-}
-
+<?php 
 ?>
 <!DOCTYPE html>
 <html lang="fa">
@@ -29,29 +11,22 @@ if (isset($_POST['submit'])) {
 
 <body>
  <div class="container">
- <h1>صفحه ورود</h1>
- <form action="login.php" method="post">
- <div class="form-group">
- <label for="username">نام کاربری</label>
- <input type="text" id="username" name="username" required>
- </div>
- <div class="form-group">
- <label for="phone
- ">شماره همراه</label>
- <input type="number" name="phone" required>
- </div>
- <div class="form-group">
- <label for="password">رمز عبور</label>
- <input type="password" id="password" name="password" required>
- </div>
- <a href="register.php">ثبت نام</a>
+    <p>
+ <h2 class="h2" >صفحه ورود</h2>
+</p>
+ <button type="submit">
+ <a href="register.php">ثبت نام
+</button>
+ </a>
  <hr>
  <div class="form-group">
- <button type="submit" name="submit">ورود</button>
+ <button type="submit" name="submit">
+    <a href="login.php">ورود</button>
+</a>
  <input type="hidden" name="submit" value="1">
  </div>
  </form>
  </div>
-</body>
+</body> 
 
 </html>
